@@ -31,3 +31,7 @@ DerivedData
 # Carthage/Checkouts
 
 Carthage/Build
+
+server/Credentials.plist
+server/node_modules
+server/bin
