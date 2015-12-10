@@ -27,12 +27,36 @@ var passport    = require('passport');
 
 var app = express();
 
+var serviceURLs = Array();
+serviceURLs["TextToSpeech"] = "https://stream.watsonplatform.net/text-to-speech/api"
+serviceURLs["SpeechToText"] = "https://stream.watsonplatform.net/speech-to-text/api"
+
 function readConfigFile() {
 
   var obj = plist.parse(fs.readFileSync('Credentials.plist', 'utf8'));
   // console.log(JSON.stringify(obj));
 
   return obj;
+}
+
+function validateFBToken(fbToken) {
+
+  var deferred = when.defer();
+
+  if (fbToken == "") {
+    deferred.reject();
+  }
+
+  var url = "https://graph.facebook.com/me?access_token=" + fbToken
+
+  request.get(url, function (error, response, body) {
+
+    if (error) { deferred.reject(error); }
+
+    deferred.resolve(body);
+
+  })
+
 }
 
 function getWatsonToken(tokenURL, serviceURL, username, password) {
@@ -63,16 +87,17 @@ app.get('/', function (req, res) {
 
 });
 
-app.get('/authorization/api/v1/token', function (req, res) {
+app.get('/:service_name/api/v1/token', function (req, res) {
 
   var url_parts = url.parse(req.url, true);
   var query = url_parts.query;
 
-  var serviceURL = query["url"];
+  var serviceName = req.params.service_name;
+  var fbToken = query["fbtoken"];
 
   var keys = readConfigFile();
 
-  var serviceName = keys["URLs"][serviceURL];
+  // var serviceName = keys["URLs"][serviceURL];
 
   if (!serviceName) {
     res.send("ERROR: need to specify a url to the service you are using.");
@@ -83,6 +108,8 @@ app.get('/authorization/api/v1/token', function (req, res) {
 
   var username = keys[serviceName + "Username"];
   var password = keys[serviceName + "Password"];
+
+  var serviceURL = serviceURLs[serviceName];
 
   if (!username || !password) {
     res.send("ERROR: could not find stored authentication in Credentials.plist");
