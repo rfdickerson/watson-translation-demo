@@ -17,6 +17,12 @@
 'use strict';
 
 var express     = require('express');
+
+// cfenv provides access to your Cloud Foundry environment
+// for more info, see: https://www.npmjs.com/package/cfenv
+var cfenv = require('cfenv');
+
+
 var fs          = require('fs');
 var plist       = require('plist');
 var url         = require('url');
@@ -26,6 +32,9 @@ var request     = require('request');
 var passport    = require('passport');
 
 var app = express();
+
+// get the app environment from Cloud Foundry
+var appEnv = cfenv.getAppEnv();
 
 var serviceURLs = Array();
 serviceURLs["TextToSpeech"] = "https://stream.watsonplatform.net/text-to-speech/api"
@@ -127,7 +136,7 @@ app.get('/:service_name/api/v1/token', function (req, res) {
 });
 
 
-var server = app.listen(3000, function () {
+var server = app.listen(appEnv.port, '0.0.0.0', function () {
   var host = server.address().address;
   var port = server.address().port;
 
