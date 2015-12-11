@@ -37,8 +37,13 @@ var app = express();
 var appEnv = cfenv.getAppEnv();
 
 var serviceURLs = Array();
-serviceURLs["TextToSpeech"] = "https://stream.watsonplatform.net/text-to-speech/api"
-serviceURLs["SpeechToText"] = "https://stream.watsonplatform.net/speech-to-text/api"
+
+var serviceURLs = {
+  TextToSpeech: "https://stream.watsonplatform.net/text-to-speech/api",
+  SpeechToText: "https://stream.watsonplatform.net/speech-to-text/api"
+};
+
+// var x = serviceURLs.SpeechToText; // undefined
 
 function readConfigFile() {
 
@@ -48,12 +53,15 @@ function readConfigFile() {
   return obj;
 }
 
-function validateFBToken(fbToken) {
+function validateFBToken(args) {
+
+  // requires a fbToken
+  var fbToken = args.fbtoken
 
   var deferred = when.defer();
 
   if (fbToken == "") {
-    deferred.reject();
+    deferred.reject("Need to provide a Facebook profile.");
   }
 
   var url = "https://graph.facebook.com/me?access_token=" + fbToken
@@ -62,24 +70,43 @@ function validateFBToken(fbToken) {
 
     if (error) { deferred.reject(error); }
 
-    deferred.resolve(body);
+    console.log(body);
+
+    args.facebook_authenticated = true
+
+    deferred.resolve(args);
 
   })
 
 }
 
-function getWatsonToken(tokenURL, serviceURL, username, password) {
+function writeToDB(args) {
 
   var deferred = when.defer();
+
+  console.log("Writing to the database");
+  deferred.resolve(args);
+}
+
+
+function getWatsonToken(args) {
+
+  // require tokenURL, serviceURL, username, password
+  // var required = ["token", ..]
+  var deferred = when.defer();
+
+  // check(args,required, deferred)
 
   var url = tokenURL + "?url=" + serviceURL;
 
   request.get(url, function (error, response, body) {
 
     if (error) { deferred.reject(error); }
-    deferred.resolve(body);
 
-  }).auth(username, password, false)
+    args.watsonToken = body;
+    deferred.resolve(args);
+
+  }).auth(username, password, false);
 
 
   // callback = function(response)
@@ -102,7 +129,7 @@ app.get('/:service_name/api/v1/token', function (req, res) {
   var query = url_parts.query;
 
   var serviceName = req.params.service_name;
-  var fbToken = query["fbtoken"];
+  var fbtoken = query["fbtoken"];
 
   var keys = readConfigFile();
 
@@ -124,14 +151,24 @@ app.get('/:service_name/api/v1/token', function (req, res) {
     res.send("ERROR: could not find stored authentication in Credentials.plist");
   }
 
-  getWatsonToken(
-    "https://stream.watsonplatform.net/authorization/api/v1/token",
-    serviceURL,
-    username, password
-    )
-    .done(function(tokenResponse) {
-      res.send(tokenResponse)
-    });
+  var args = {
+    username: username,
+    password: password,
+    serviceURL: serviceURL,
+    fbtoken: fbtoken,
+    tokenURL: "https://stream.watsonplatform.net/authorization/api/v1/token"
+  }
+
+  validateFBToken(args)
+  .then(writeToDB)
+  .then(getToken)
+  .otherwise(function (err) {
+    res.send(err);
+  });
+
+  var watsonToken = args.token;
+
+  res.send(watsonToken);
 
 });
 
