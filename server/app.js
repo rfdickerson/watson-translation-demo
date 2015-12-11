@@ -36,21 +36,17 @@ var app = express();
 // get the app environment from Cloud Foundry
 var appEnv = cfenv.getAppEnv();
 
-var serviceURLs = Array();
-
 var serviceURLs = {
-  TextToSpeech: "https://stream.watsonplatform.net/text-to-speech/api",
-  SpeechToText: "https://stream.watsonplatform.net/speech-to-text/api"
-};
+        TextToSpeech: "https://stream.watsonplatform.net/text-to-speech/api",
+        SpeechToText: "https://stream.watsonplatform.net/speech-to-text/api"
+    };
 
-// var x = serviceURLs.SpeechToText; // undefined
 
 function readConfigFile() {
 
-  var obj = plist.parse(fs.readFileSync('Credentials.plist', 'utf8'));
-  // console.log(JSON.stringify(obj));
+    var obj = plist.parse(fs.readFileSync('Credentials.plist', 'utf8'));
 
-  return obj;
+    return obj;
 }
 
 function validateFBToken(args) {
@@ -75,7 +71,11 @@ function validateFBToken(args) {
     var response = JSON.parse(body);
 
     if (response.verified == true) {
+
+      args.email = response.email;
+
       deferred.resolve(args);
+
     } else {
       deferred.reject("Facebook rejected the token");
     }
