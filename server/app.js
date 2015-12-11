@@ -72,11 +72,19 @@ function validateFBToken(args) {
 
     console.log(body);
 
-    args.facebook_authenticated = true
+    var response = JSON.parse(body);
 
-    deferred.resolve(args);
+    if (response.verified == true) {
+      deferred.resolve(args);
+    } else {
+      deferred.reject("Facebook rejected the token");
+    }
+
+    
 
   })
+
+  return deferred.promise;
 
 }
 
@@ -86,6 +94,8 @@ function writeToDB(args) {
 
   console.log("Writing to the database");
   deferred.resolve(args);
+
+  return deferred.promise;
 }
 
 
@@ -97,6 +107,11 @@ function getWatsonToken(args) {
 
   // check(args,required, deferred)
 
+  var tokenURL = args.tokenURL;
+  var serviceURL = args.serviceURL;
+  var username = args.username;
+  var password = args.password;
+
   var url = tokenURL + "?url=" + serviceURL;
 
   request.get(url, function (error, response, body) {
@@ -104,6 +119,9 @@ function getWatsonToken(args) {
     if (error) { deferred.reject(error); }
 
     args.watsonToken = body;
+
+    console.log("Received Watson token: " + body);
+
     deferred.resolve(args);
 
   }).auth(username, password, false);
@@ -161,14 +179,17 @@ app.get('/:service_name/api/v1/token', function (req, res) {
 
   validateFBToken(args)
   .then(writeToDB)
-  .then(getToken)
+  .then(getWatsonToken)
+  .then( function (args) {
+    res.send(args.watsonToken);
+  })  
   .otherwise(function (err) {
     res.send(err);
   });
 
-  var watsonToken = args.token;
+  //var watsonToken = args.token;
 
-  res.send(watsonToken);
+  // res.send(watsonToken);
 
 });
 
