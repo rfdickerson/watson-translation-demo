@@ -37,9 +37,9 @@ var app = express();
 var appEnv = cfenv.getAppEnv();
 
 var serviceURLs = {
-        TextToSpeech: "https://stream.watsonplatform.net/text-to-speech/api",
-        SpeechToText: "https://stream.watsonplatform.net/speech-to-text/api"
-    };
+    TextToSpeech: "https://stream.watsonplatform.net/text-to-speech/api",
+    SpeechToText: "https://stream.watsonplatform.net/speech-to-text/api"
+};
 
 
 function readConfigFile() {
@@ -51,80 +51,94 @@ function readConfigFile() {
 
 function validateFBToken(args) {
 
-  // requires a fbToken
-  var fbToken = args.fbtoken
+    // requires a fbToken
+    var fbToken = args.fbtoken
 
-  var deferred = when.defer();
+    var deferred = when.defer();
 
-  if (fbToken == "") {
-    deferred.reject("Need to provide a Facebook profile.");
-  }
-
-  var url = "https://graph.facebook.com/me?access_token=" + fbToken
-
-  request.get(url, function (error, response, body) {
-
-    if (error) { deferred.reject(error); }
-
-    console.log(body);
-
-    var response = JSON.parse(body);
-
-    if (response.verified == true) {
-
-      args.email = response.email;
-
-      deferred.resolve(args);
-
-    } else {
-      deferred.reject("Facebook rejected the token");
+    if (fbToken == "") {
+	deferred.reject("Need to provide a Facebook profile.");
     }
 
-    
+    var url = "https://graph.facebook.com/me?access_token=" + fbToken
 
-  })
+    request.get(url, function (error, response, body) {
 
-  return deferred.promise;
+	if (error) { deferred.reject(error); }
+
+	console.log(body);
+
+	var response = JSON.parse(body);
+
+	if (response.verified == true) {
+
+	    args.email = response.email;
+	    deferred.resolve(args);
+	    
+	} else {
+
+	    var err = {error: {
+		message: "Facebook OAuth token could not be verified.",
+		type: "OAuthException"}}
+	    
+	    deferred.reject(err);
+	    
+	}
+
+	
+
+    });
+
+    return deferred.promise;
 
 }
 
+
 function writeToDB(args) {
 
-  var deferred = when.defer();
+    var deferred = when.defer();
 
-  console.log("Writing to the database");
-  deferred.resolve(args);
+    console.log("Writing to the database");
+    deferred.resolve(args);
 
-  return deferred.promise;
+    return deferred.promise;
 }
 
 
 function getWatsonToken(args) {
 
-  // require tokenURL, serviceURL, username, password
-  // var required = ["token", ..]
-  var deferred = when.defer();
+    // require tokenURL, serviceURL, username, password
+    // var required = ["token", ..]
+    var deferred = when.defer();
 
-  // check(args,required, deferred)
+    // check(args,required, deferred)
 
-  var tokenURL = args.tokenURL;
-  var serviceURL = args.serviceURL;
-  var username = args.username;
-  var password = args.password;
+    var tokenURL = args.tokenURL;
+    var serviceURL = args.serviceURL;
+    var username = args.username;
+    var password = args.password;
 
-  var url = tokenURL + "?url=" + serviceURL;
+    var url = tokenURL + "?url=" + serviceURL;
 
-  request.get(url, function (error, response, body) {
+    request.get(url, function (error, response, body) {
 
-    if (error) { deferred.reject(error); }
+	if (error) {
 
-    args.watsonToken = body;
+	    err = {error: {
+		message: "Watson rejected the token request.",
+		type: "OAuth Exception"}}
+	    
+	    deferred.reject(err);
+	  
+	}
 
-    console.log("Received Watson token: " + body);
+	args.watsonToken = body;
 
-    deferred.resolve(args);
+	console.log("Received Watson token: " + body);
 
-  }).auth(username, password, false);
+	deferred.resolve(args);
+
+    }).auth(username, password, false);
 
 
   // callback = function(response)
@@ -143,60 +157,63 @@ app.get('/', function (req, res) {
 
 app.get('/:service_name/api/v1/token', function (req, res) {
 
-  var url_parts = url.parse(req.url, true);
-  var query = url_parts.query;
+    var url_parts = url.parse(req.url, true);
+    var query = url_parts.query;
 
-  var serviceName = req.params.service_name;
-  var fbtoken = query["fbtoken"];
+    var serviceName = req.params.service_name;
+    var fbtoken = query["fbtoken"];
 
-  var keys = readConfigFile();
+    var keys = readConfigFile();
 
-  // var serviceName = keys["URLs"][serviceURL];
+    // var serviceName = keys["URLs"][serviceURL];
 
-  if (!serviceName) {
-    res.send("ERROR: need to specify a url to the service you are using.");
-  }
+    if (!serviceName) {
+	res.send("ERROR: need to specify a url to the service you are using.");
+    }
 
-  console.log("Fetching key for " + serviceName);
-  // console.log(keys);
+    console.log("Fetching key for " + serviceName);
+    // console.log(keys);
 
-  var username = keys[serviceName + "Username"];
-  var password = keys[serviceName + "Password"];
+    var username = keys[serviceName + "Username"];
+    var password = keys[serviceName + "Password"];
 
-  var serviceURL = serviceURLs[serviceName];
+    var serviceURL = serviceURLs[serviceName];
 
-  if (!username || !password) {
-    res.send("ERROR: could not find stored authentication in Credentials.plist");
-  }
+    if (!username || !password) {
+	res.send("ERROR: could not find stored authentication in Credentials.plist");
+    }
 
-  var args = {
-    username: username,
-    password: password,
-    serviceURL: serviceURL,
-    fbtoken: fbtoken,
-    tokenURL: "https://stream.watsonplatform.net/authorization/api/v1/token"
-  }
+    var args = {
+	username: username,
+	password: password,
+	serviceURL: serviceURL,
+	fbtoken: fbtoken,
+	tokenURL: "https://stream.watsonplatform.net/authorization/api/v1/token"
+    }
+    
+    validateFBToken(args)
+	.then(writeToDB)
+	.then(getWatsonToken)
+	.then( function (args) {
 
-  validateFBToken(args)
-  .then(writeToDB)
-  .then(getWatsonToken)
-  .then( function (args) {
-    res.send(args.watsonToken);
-  })  
-  .otherwise(function (err) {
-    res.send(err);
-  });
+	    var resp = {token: args.watsonToken}; 
+	    res.send(resp);
+	})  
+	.otherwise(function (err) {
+	    res.send(err);
+	});
 
-  //var watsonToken = args.token;
+    //var watsonToken = args.token;
 
-  // res.send(watsonToken);
+    // res.send(watsonToken);
 
 });
 
 
 var server = app.listen(appEnv.port, '0.0.0.0', function () {
-  var host = server.address().address;
-  var port = server.address().port;
 
-  console.log('Example app listening at http://%s:%s', host, port);
+    var host = server.address().address;
+    var port = server.address().port;
+
+    console.log('Example app listening at http://%s:%s', host, port);
 });
