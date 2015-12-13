@@ -6,7 +6,7 @@ iOS and with a NodeJS Backend.
 
 Run the server locally:
 
-```
+```shell
 $ cd server
 $ npm install
 $ node app.js
