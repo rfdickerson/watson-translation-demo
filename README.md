@@ -18,7 +18,7 @@ Server deployment:
 
 First, you must use the Cloud Foundary tool to create the services on your Bluemix account:
 
-```
+``` shell
 $ cf login
 $ cf create-service speech_to_text standard speech-to-text-service
 $ cf create-service text_to_speech standard text-to-speech-service
