@@ -1,7 +1,11 @@
 applications:
-- path: .
+- services:
+  - text-to-speech-service
+  - speech-to-text-service
+  - language-translation-service
+  path: .
   memory: 256M
-  instances: 1
+  instances: 2
   domain: mybluemix.net
   name: WatsonSDKDemo
   host: watsonsdkdemo

@@ -51,6 +51,8 @@ function readConfigFile() {
 
     var obj = plist.parse(fs.readFileSync('Credentials.plist', 'utf8'));
 
+    console.log(appEnv.getServices());
+    
     return obj;
 }
 
@@ -170,8 +172,6 @@ app.get('/:service_name/api/v1/token', function (req, res) {
 
     var keys = readConfigFile();
 
-    // var serviceName = keys["URLs"][serviceURL];
-
     if (!serviceName) {
 	res.send("ERROR: need to specify a url to the service you are using.");
     }
@@ -179,16 +179,21 @@ app.get('/:service_name/api/v1/token', function (req, res) {
     console.log("Fetching key for " + serviceName);
     // console.log(keys);
 
-    var username = keys[serviceName + "Username"];
-    var password = keys[serviceName + "Password"];
+    var username = appEnv.getServices()[serviceName].credentials.username;
+    var password = appEnv.getServices()[serviceName].credentials.password;
+    var serviceURL = appEnv.getServices()[serviceName].credentials.url;
 
-    var serviceURL = serviceURLs[serviceName];
+    console.log("Using " + username + " " + password + " " + serviceURL);
+    // var username = keys[serviceName + "Username"];
+    // var password = keys[serviceName + "Password"];
 
-    if (!username || !password) {
+    //var serviceURL = serviceURLs[serviceName];
+
+    if (!username || !password || !serviceURL) {
 	res.send("ERROR: could not find stored authentication in Credentials.plist");
     }
 
-    if (serviceName == "TextToSpeech" || serviceName == "SpeechToText") {
+    if (serviceName == "text-to-speech-service" || serviceName == "speech-to-text-service") {
 	var tokenURL = tokenURLs.Stream;
     } else {
 	var tokenURL = tokenURLs.Gateway;
