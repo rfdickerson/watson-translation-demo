@@ -22,14 +22,10 @@ var express     = require('express');
 // for more info, see: https://www.npmjs.com/package/cfenv
 var cfenv = require('cfenv');
 
-
-var fs          = require('fs');
-var plist       = require('plist');
 var url         = require('url');
 var http        = require('http');
 var when        = require('when');
 var request     = require('request');
-// var passport    = require('passport');
 
 var app = express();
 
@@ -47,15 +43,8 @@ var tokenURLs = {
     Stream: "https://stream.watsonplatform.net/authorization/api/v1/token"
 };
 
-function readConfigFile() {
 
-    var obj = plist.parse(fs.readFileSync('Credentials.plist', 'utf8'));
-
-    console.log(appEnv.getServices());
-    
-    return obj;
-}
-
+// This function takes an OAuth token for Facebook and validates it using their web service.
 function validateFBToken(args) {
 
     // requires a fbToken
@@ -80,6 +69,9 @@ function validateFBToken(args) {
 	if (response.verified == true) {
 
 	    args.email = response.email;
+	    args.first_name = response.first_name;
+	    args.last_name = response.last_name;
+	    
 	    deferred.resolve(args);
 	    
 	} else {
@@ -115,10 +107,8 @@ function writeToDB(args) {
 function getWatsonToken(args) {
 
     // require tokenURL, serviceURL, username, password
-    // var required = ["token", ..]
-    var deferred = when.defer();
 
-    // check(args,required, deferred)
+    var deferred = when.defer();
 
     var tokenURL = args.tokenURL;
     var serviceURL = args.serviceURL;
@@ -147,8 +137,6 @@ function getWatsonToken(args) {
 
     }).auth(username, password, false);
 
-
-  // callback = function(response)
   return deferred.promise;
 }
 
@@ -170,8 +158,6 @@ app.get('/:service_name/api/v1/token', function (req, res) {
     var serviceName = req.params.service_name;
     var fbtoken = query["fbtoken"];
 
-    var keys = readConfigFile();
-
     if (!serviceName) {
 	res.send("ERROR: need to specify a url to the service you are using.");
     }
@@ -179,18 +165,29 @@ app.get('/:service_name/api/v1/token', function (req, res) {
     console.log("Fetching key for " + serviceName);
     // console.log(keys);
 
+    if (!appEnv.getServices()[serviceName]) {
+	var err = {error: {
+	    message: "Could not find service " + serviceName,
+	    type: "Service exception",
+	    code: 403}};
+	res.send(err);
+	return;
+    }
+    
     var username = appEnv.getServices()[serviceName].credentials.username;
     var password = appEnv.getServices()[serviceName].credentials.password;
     var serviceURL = appEnv.getServices()[serviceName].credentials.url;
 
-    console.log("Using " + username + " " + password + " " + serviceURL);
-    // var username = keys[serviceName + "Username"];
-    // var password = keys[serviceName + "Password"];
-
-    //var serviceURL = serviceURLs[serviceName];
+    console.log("Credentials " + username + " " + password + " " + serviceURL);
 
     if (!username || !password || !serviceURL) {
-	res.send("ERROR: could not find stored authentication in Credentials.plist");
+	var err = {error: {
+	    message: "Credentials not found for " + serviceName,
+	    type: "Service exception",
+	    code: 403}};
+	
+	res.send(err);
+	return;
     }
 
     if (serviceName == "text-to-speech-service" || serviceName == "speech-to-text-service") {
@@ -212,16 +209,15 @@ app.get('/:service_name/api/v1/token', function (req, res) {
 	.then(getWatsonToken)
 	.then( function (args) {
 
-	    var resp = {token: args.watsonToken}; 
+	    var resp = {token: args.watsonToken,
+			first_name: args.first_name,
+			last_name: args.last_name,
+			email: args.email}; 
 	    res.send(resp);
 	})  
 	.otherwise(function (err) {
 	    res.send(err);
 	});
-
-    //var watsonToken = args.token;
-
-    // res.send(watsonToken);
 
 });
 
