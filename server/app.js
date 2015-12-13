@@ -29,7 +29,7 @@ var url         = require('url');
 var http        = require('http');
 var when        = require('when');
 var request     = require('request');
-var passport    = require('passport');
+// var passport    = require('passport');
 
 var app = express();
 
@@ -38,9 +38,14 @@ var appEnv = cfenv.getAppEnv();
 
 var serviceURLs = {
     TextToSpeech: "https://stream.watsonplatform.net/text-to-speech/api",
-    SpeechToText: "https://stream.watsonplatform.net/speech-to-text/api"
+    SpeechToText: "https://stream.watsonplatform.net/speech-to-text/api",
+    LanguageTranslation: "https://gateway.watsonplatform.net/language-translation/api"
 };
 
+var tokenURLs = {
+    Gateway: "https://gateway.watsonplatform.net/authorization/api/v1/token",
+    Stream: "https://stream.watsonplatform.net/authorization/api/v1/token"
+};
 
 function readConfigFile() {
 
@@ -183,12 +188,18 @@ app.get('/:service_name/api/v1/token', function (req, res) {
 	res.send("ERROR: could not find stored authentication in Credentials.plist");
     }
 
+    if (serviceName == "TextToSpeech" || serviceName == "SpeechToText") {
+	var tokenURL = tokenURLs.Stream;
+    } else {
+	var tokenURL = tokenURLs.Gateway;
+    }
+    
     var args = {
 	username: username,
 	password: password,
 	serviceURL: serviceURL,
 	fbtoken: fbtoken,
-	tokenURL: "https://stream.watsonplatform.net/authorization/api/v1/token"
+	tokenURL: tokenURL
     }
     
     validateFBToken(args)
