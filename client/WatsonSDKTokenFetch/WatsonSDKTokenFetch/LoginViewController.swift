@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController, FBSDKLoginButtonDelegate {
+class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
 
     @IBOutlet weak var tokenLabel: UILabel!
     
@@ -20,7 +20,10 @@ class ViewController: UIViewController, FBSDKLoginButtonDelegate {
             
             print("User already logged in with token \(FBSDKAccessToken.currentAccessToken().tokenString)")
             
-            tokenLabel.text = FBSDKAccessToken.currentAccessToken().tokenString
+            let translateController = self.storyboard?.instantiateViewControllerWithIdentifier("TranslateController") as? TranslateViewController
+            self.navigationController?.pushViewController(translateController!, animated: true)
+            
+            // tokenLabel.text = FBSDKAccessToken.currentAccessToken().tokenString
             
         } else { }
         
@@ -28,6 +31,7 @@ class ViewController: UIViewController, FBSDKLoginButtonDelegate {
         
         self.view.addSubview(loginView)
         loginView.center = self.view.center
+        loginView.center.y += 20
         loginView.readPermissions = ["public_profile", "email"]
         loginView.delegate = self
 
@@ -46,7 +50,10 @@ class ViewController: UIViewController, FBSDKLoginButtonDelegate {
         let token = FBSDKAccessToken.currentAccessToken()
         print("User Logged In token \(token): ")
         
-        tokenLabel.text = FBSDKAccessToken.currentAccessToken().tokenString
+        let translateController = self.storyboard?.instantiateViewControllerWithIdentifier("TranslateController") as? TranslateViewController
+        self.navigationController?.pushViewController(translateController!, animated: true)
+        
+        // tokenLabel.text = FBSDKAccessToken.currentAccessToken().tokenString
         
         if ((error) != nil)
         {
@@ -68,7 +75,7 @@ class ViewController: UIViewController, FBSDKLoginButtonDelegate {
     func loginButtonDidLogOut(loginButton: FBSDKLoginButton!) {
         print("User Logged Out")
         
-        tokenLabel.text = ""
+        // tokenLabel.text = ""
     }
 
 

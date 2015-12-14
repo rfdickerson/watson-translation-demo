@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "4236F078A84CEAC1DB06DAFEC64F120F1277D7C1",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "4236F078A84CEAC1DB06DAFEC64F120F1277D7C1" : 0,
+    "709C1E9D87E36564343935DBB27DC3F076453642" : 0
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "CBDEEF7C-F977-412E-82EF-B338D166932A",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "4236F078A84CEAC1DB06DAFEC64F120F1277D7C1" : "watson-sdk-authentication\/",
+    "709C1E9D87E36564343935DBB27DC3F076453642" : "Watson-iOS-SDK\/"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "WatsonSDKTokenFetch",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "client\/WatsonSDKTokenFetch\/WatsonSDKTokenFetch.xcodeproj",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/rfdickerson\/watson-sdk-authentication.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "4236F078A84CEAC1DB06DAFEC64F120F1277D7C1"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/IBM-MIL\/Watson-iOS-SDK.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "709C1E9D87E36564343935DBB27DC3F076453642"
+    }
+  ]
+}

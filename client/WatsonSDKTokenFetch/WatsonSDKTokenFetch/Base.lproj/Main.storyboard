@@ -1,55 +1,110 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9060" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="7P0-9b-cNy">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9051"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Watson SDK Demo Login-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="WatsonSDKTokenFetch" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LoginController" title="Watson SDK Demo Login" id="BYZ-38-t0r" customClass="LoginViewController" customModule="WatsonSDKTokenFetch" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="64" width="600" height="536"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="OAuth Token: " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2tG-xV-ja6">
-                                <rect key="frame" x="20" y="20" width="107.5" height="20.5"/>
-                                <animations/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="LanguageTranslationLogo" translatesAutoresizingMaskIntoConstraints="NO" id="jNh-lG-6Vk">
+                                <rect key="frame" x="172" y="20" width="256" height="256"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="256" id="LRR-rz-ABd"/>
+                                    <constraint firstAttribute="height" constant="256" id="Pnj-dd-7br"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Language Translation" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hQs-bz-Ohl">
+                                <rect key="frame" x="204" y="292" width="192.5" height="24"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jom-eU-Ydu">
-                                <rect key="frame" x="20" y="75" width="226" height="110"/>
-                                <animations/>
-                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                <color key="textColor" white="0.69772070489431681" alpha="1" colorSpace="calibratedWhite"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                         </subviews>
-                        <animations/>
-                        <color key="backgroundColor" red="0.054901960780000002" green="0.21176470589999999" blue="0.26274509800000001" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" red="0.081747956573963165" green="0.13494287431240082" blue="0.19932392239570618" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstItem="Jom-eU-Ydu" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="0Ut-qB-UKx"/>
-                            <constraint firstItem="2tG-xV-ja6" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="AQT-5R-f1r"/>
-                            <constraint firstItem="2tG-xV-ja6" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="OWd-Cr-QAj"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="Jom-eU-Ydu" secondAttribute="trailing" constant="10" id="Z5c-Cz-Esh"/>
-                            <constraint firstItem="Jom-eU-Ydu" firstAttribute="top" secondItem="2tG-xV-ja6" secondAttribute="bottom" constant="34" id="wuP-rV-nzP"/>
+                            <constraint firstItem="hQs-bz-Ohl" firstAttribute="top" secondItem="jNh-lG-6Vk" secondAttribute="bottom" constant="16" id="BcX-p1-6zn"/>
+                            <constraint firstItem="hQs-bz-Ohl" firstAttribute="centerX" secondItem="jNh-lG-6Vk" secondAttribute="centerX" id="oA7-jB-LgZ"/>
+                            <constraint firstItem="jNh-lG-6Vk" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="rGJ-hC-elJ"/>
+                            <constraint firstItem="jNh-lG-6Vk" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="20" id="tWy-0q-aHt"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" title="Login" id="4N6-c4-Mcu"/>
                     <connections>
-                        <outlet property="tokenLabel" destination="Jom-eU-Ydu" id="eR9-0c-Jhx"/>
+                        <segue destination="DrE-XT-2ry" kind="show" identifier="segue" id="fqT-uU-olI"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="1194" y="337"/>
+        </scene>
+        <!--Language Translation-->
+        <scene sceneID="cWj-0k-Iso">
+            <objects>
+                <viewController storyboardIdentifier="TranslateController" title="Language Translation" id="DrE-XT-2ry" customClass="TranslateViewController" customModule="WatsonSDKTokenFetch" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="j9R-Ak-KF8"/>
+                        <viewControllerLayoutGuide type="bottom" id="ye5-n6-e0Q"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Ml2-sH-I4U">
+                        <rect key="frame" x="0.0" y="64" width="600" height="536"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Translate the Text:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DGf-pu-QSC">
+                                <rect key="frame" x="20" y="84" width="142" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" red="0.070588235294117646" green="0.10196078431372549" blue="0.15294117647058825" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="leadingMargin" secondItem="DGf-pu-QSC" secondAttribute="leading" id="8PM-k2-reM"/>
+                            <constraint firstItem="DGf-pu-QSC" firstAttribute="top" secondItem="j9R-Ak-KF8" secondAttribute="bottom" constant="84" id="rF4-zL-O2S"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Translate" id="eQn-Vt-03i"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="858-hd-KiD" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1991" y="337"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="h2Y-gl-fg6">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="7P0-9b-cNy" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="y0f-Ig-cET">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" red="0.093600000000000003" green="0.56263999999999992" blue="0.78000000000000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="barTintColor" red="0.093600000000000003" green="0.56264000000000003" blue="0.78000000000000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <textAttributes key="titleTextAttributes">
+                            <color key="textColor" red="0.99607849120000003" green="0.99215692280000001" blue="0.99215692280000001" alpha="1" colorSpace="deviceRGB"/>
+                        </textAttributes>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="Mpl-6N-fZ1"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="qlZ-rL-qE4" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
             <point key="canvasLocation" x="382" y="337"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="LanguageTranslationLogo" width="128" height="128"/>
+    </resources>
 </document>
