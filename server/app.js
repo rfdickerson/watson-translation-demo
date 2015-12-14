@@ -26,6 +26,7 @@ var url         = require('url');
 var http        = require('http');
 var when        = require('when');
 var request     = require('request');
+var crypto      = require('crypto-js')
 
 var app = express();
 
@@ -44,6 +45,11 @@ var tokenURLs = {
 };
 
 
+function getAppProof( access_token, app_secret) {
+  var hash = crypto.HmacSHA256(access_token, app_secret);
+  return hash.toString(CryptoJS.enc.Base64);
+}
+
 // This function takes an OAuth token for Facebook and validates it using their web service.
 function validateFBToken(args) {
 
@@ -56,7 +62,14 @@ function validateFBToken(args) {
 	deferred.reject("Need to provide a Facebook profile.");
     }
 
-    var url = "https://graph.facebook.com/me?access_token=" + fbToken
+    var proof = getAppProof(fbToken, APP_SECRET);
+
+    console.log("Proof is " + proof);
+
+    var url = "https://graph.facebook.com/me?fields=email,first_name,last_name?access_token="
+        + fbToken + "&appsecret_proof=" + proof;
+
+    console.log("Validating token at " + url);
 
     request.get(url, function (error, response, body) {
 
@@ -66,25 +79,25 @@ function validateFBToken(args) {
 
 	var response = JSON.parse(body);
 
-	if (response.verified == true) {
+	if (response.id) {
 
 	    args.email = response.email;
 	    args.first_name = response.first_name;
 	    args.last_name = response.last_name;
-	    
+
 	    deferred.resolve(args);
-	    
+
 	} else {
 
 	    var err = {error: {
 		message: "Facebook OAuth token could not be verified.",
 		type: "OAuthException"}}
-	    
+
 	    deferred.reject(err);
-	    
+
 	}
 
-	
+
 
     });
 
@@ -124,9 +137,9 @@ function getWatsonToken(args) {
 	    err = {error: {
 		message: "Watson rejected the token request.",
 		type: "OAuth Exception"}}
-	    
+
 	    deferred.reject(err);
-	  
+
 	}
 
 	args.watsonToken = body;
@@ -166,14 +179,14 @@ app.get('/:service_name/api/v1/token', function (req, res) {
     // console.log(keys);
 
     if (!appEnv.getServices()[serviceName]) {
-	var err = {error: {
-	    message: "Could not find service " + serviceName,
-	    type: "Service exception",
-	    code: 403}};
+	     var err = {error: {
+	        message: "Could not find service " + serviceName,
+	        type: "Service exception",
+	        code: 403}};
 	res.send(err);
 	return;
     }
-    
+
     var username = appEnv.getServices()[serviceName].credentials.username;
     var password = appEnv.getServices()[serviceName].credentials.password;
     var serviceURL = appEnv.getServices()[serviceName].credentials.url;
@@ -185,7 +198,7 @@ app.get('/:service_name/api/v1/token', function (req, res) {
 	    message: "Credentials not found for " + serviceName,
 	    type: "Service exception",
 	    code: 403}};
-	
+
 	res.send(err);
 	return;
     }
@@ -195,7 +208,7 @@ app.get('/:service_name/api/v1/token', function (req, res) {
     } else {
 	var tokenURL = tokenURLs.Gateway;
     }
-    
+
     var args = {
 	username: username,
 	password: password,
@@ -203,7 +216,7 @@ app.get('/:service_name/api/v1/token', function (req, res) {
 	fbtoken: fbtoken,
 	tokenURL: tokenURL
     }
-    
+
     validateFBToken(args)
 	.then(writeToDB)
 	.then(getWatsonToken)
@@ -212,9 +225,9 @@ app.get('/:service_name/api/v1/token', function (req, res) {
 	    var resp = {token: args.watsonToken,
 			first_name: args.first_name,
 			last_name: args.last_name,
-			email: args.email}; 
+			email: args.email};
 	    res.send(resp);
-	})  
+	})
 	.otherwise(function (err) {
 	    res.send(err);
 	});

@@ -3,6 +3,7 @@ applications:
   - text-to-speech-service
   - speech-to-text-service
   - language-translation-service
+  - text_to_speech_openmike
   path: .
   memory: 256M
   instances: 2
