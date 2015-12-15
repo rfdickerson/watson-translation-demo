@@ -14,7 +14,7 @@ $ node app.js
 
 Load your browser to http://localhost:6001/LanguageTranslation/api/v1/token?fbtoken=XXX where XXX is your Facebook token.
 
-Server deployment:
+## Server deployment:
 
 First, you must use the Cloud Foundary tool to create the services on your Bluemix account:
 
