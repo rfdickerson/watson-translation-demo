@@ -26,11 +26,24 @@ var url         = require('url');
 var http        = require('http');
 var when        = require('when');
 var request     = require('request');
+var crypto      = require('crypto-js');
 
 var app = express();
 
+var appEnv;
 // get the app environment from Cloud Foundry
-var appEnv = cfenv.getAppEnv();
+if (process.env.VCAP_SERVICES) {
+    appEnv = cfenv.getAppEnv();
+    // otherwise, specify the service values when creating the appEnv
+} else {
+    var localVCAP = require("./VCAP_SERVICES.json");
+    appEnv = cfenv.getAppEnv({vcap: localVCAP});
+}
+
+console.log(appEnv);
+
+var creds = appEnv.getServiceCreds(/facebook-authentication/) || {}
+console.log("Facebook Secret is :", creds.secret);
 
 var serviceURLs = {
     TextToSpeech: "https://stream.watsonplatform.net/text-to-speech/api",
@@ -44,6 +57,12 @@ var tokenURLs = {
 };
 
 
+function fbAppProof(accessToken, appSecret) {
+
+    var hash = crypto.HmacSHA256(accessToken, appSecret);
+    return crypto.enc.Base64.stringify(hash);
+}
+
 // This function takes an OAuth token for Facebook and validates it using their web service.
 function validateFBToken(args) {
 
@@ -53,10 +72,17 @@ function validateFBToken(args) {
     var deferred = when.defer();
 
     if (fbToken == "") {
-	deferred.reject("Need to provide a Facebook profile.");
+	deferred.reject("Need to provide a Facebook OAuth token.");
     }
 
-    var url = "https://graph.facebook.com/me?access_token=" + fbToken
+    var proof = fbAppProof("Hello", "Hello");
+    console.log(proof);
+    
+    var url = ["https://graph.facebook.com/me?access_token=",
+	       fbToken
+	      ].join("");
+
+    console.log("Sending verification to facebook:", url);
 
     request.get(url, function (error, response, body) {
 
@@ -66,7 +92,7 @@ function validateFBToken(args) {
 
 	var response = JSON.parse(body);
 
-	if (response.verified == true) {
+	if (response.id) {
 
 	    args.email = response.email;
 	    args.first_name = response.first_name;

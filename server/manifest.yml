@@ -3,6 +3,7 @@ applications:
   - text-to-speech-service
   - speech-to-text-service
   - language-translation-service
+  - facebook-authentication
   path: .
   memory: 256M
   instances: 2
