@@ -20,7 +20,8 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
             
             print("User already logged in with token \(FBSDKAccessToken.currentAccessToken().tokenString)")
             
-            let translateController = self.storyboard?.instantiateViewControllerWithIdentifier("TranslateController") as? TranslateViewController
+            let translateController = self.storyboard?
+                .instantiateViewControllerWithIdentifier("TranslateController") as? TranslateViewController
             self.navigationController?.pushViewController(translateController!, animated: true)
             
             // tokenLabel.text = FBSDKAccessToken.currentAccessToken().tokenString
@@ -32,7 +33,7 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
         self.view.addSubview(loginView)
         loginView.center = self.view.center
         loginView.center.y += 20
-        loginView.readPermissions = ["public_profile", "email"]
+        loginView.readPermissions = ["public_profile", "email", "user_friends"]
         loginView.delegate = self
 
         // Do any additional setup after loading the view, typically from a nib.
@@ -48,7 +49,7 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
     func loginButton(loginButton: FBSDKLoginButton!, didCompleteWithResult result: FBSDKLoginManagerLoginResult!, error: NSError!) {
         
         let token = FBSDKAccessToken.currentAccessToken()
-        print("User Logged In token \(token): ")
+        print("User logged in with token: \(token.tokenString)")
         
         let translateController = self.storyboard?.instantiateViewControllerWithIdentifier("TranslateController") as? TranslateViewController
         self.navigationController?.pushViewController(translateController!, animated: true)

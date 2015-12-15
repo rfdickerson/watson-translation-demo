@@ -14,7 +14,60 @@
 		E1103AD01C17A9FF0062BEB6 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E1103ACD1C17A9FF0062BEB6 /* FBSDKCoreKit.framework */; };
 		E1103AD11C17A9FF0062BEB6 /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E1103ACE1C17A9FF0062BEB6 /* FBSDKLoginKit.framework */; };
 		E171CC201C1E3A3100D64F3A /* TranslateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E171CC1F1C1E3A3100D64F3A /* TranslateViewController.swift */; };
+		E184E8291C1E6ED900185B5D /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E184E8221C1E6ED900185B5D /* Alamofire.framework */; };
+		E184E82A1C1E6ED900185B5D /* AlamofireObjectMapper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E184E8231C1E6ED900185B5D /* AlamofireObjectMapper.framework */; };
+		E184E82B1C1E6ED900185B5D /* HTTPStatusCodes.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E184E8241C1E6ED900185B5D /* HTTPStatusCodes.framework */; };
+		E184E82C1C1E6ED900185B5D /* ObjectMapper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E184E8251C1E6ED900185B5D /* ObjectMapper.framework */; };
+		E184E82D1C1E6ED900185B5D /* Starscream.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E184E8261C1E6ED900185B5D /* Starscream.framework */; };
+		E184E82E1C1E6ED900185B5D /* SwiftyJSON.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E184E8271C1E6ED900185B5D /* SwiftyJSON.framework */; };
+		E184E82F1C1E6ED900185B5D /* XCGLogger.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E184E8281C1E6ED900185B5D /* XCGLogger.framework */; };
+		E184E8381C1E6F7300185B5D /* Alamofire.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = E184E8221C1E6ED900185B5D /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		E184E8391C1E6F7300185B5D /* AlamofireObjectMapper.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = E184E8231C1E6ED900185B5D /* AlamofireObjectMapper.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		E184E83A1C1E6F7300185B5D /* HTTPStatusCodes.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = E184E8241C1E6ED900185B5D /* HTTPStatusCodes.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		E184E83B1C1E6F7300185B5D /* ObjectMapper.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = E184E8251C1E6ED900185B5D /* ObjectMapper.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		E184E83C1C1E6F7300185B5D /* Starscream.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = E184E8261C1E6ED900185B5D /* Starscream.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		E184E83D1C1E6F7300185B5D /* SwiftyJSON.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = E184E8271C1E6ED900185B5D /* SwiftyJSON.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		E184E83E1C1E6F7400185B5D /* XCGLogger.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = E184E8281C1E6ED900185B5D /* XCGLogger.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		E184E83F1C1E6FBB00185B5D /* WatsonSDK.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = E171CC291C1E4ED900D64F3A /* WatsonSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		E1DE23A81C1E4F0D00ED9EB8 /* WatsonSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E171CC291C1E4ED900D64F3A /* WatsonSDK.framework */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		E171CC281C1E4ED900D64F3A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E171CC231C1E4ED900D64F3A /* WatsonSDK.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 7A36F99D1BF8DDCA005E478F;
+			remoteInfo = WatsonSDK;
+		};
+		E171CC2A1C1E4ED900D64F3A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E171CC231C1E4ED900D64F3A /* WatsonSDK.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 7A36F9A71BF8DDCB005E478F;
+			remoteInfo = WatsonSDKTests;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		E184E8371C1E6F6600185B5D /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				E184E8381C1E6F7300185B5D /* Alamofire.framework in CopyFiles */,
+				E184E8391C1E6F7300185B5D /* AlamofireObjectMapper.framework in CopyFiles */,
+				E184E83A1C1E6F7300185B5D /* HTTPStatusCodes.framework in CopyFiles */,
+				E184E83B1C1E6F7300185B5D /* ObjectMapper.framework in CopyFiles */,
+				E184E83C1C1E6F7300185B5D /* Starscream.framework in CopyFiles */,
+				E184E83D1C1E6F7300185B5D /* SwiftyJSON.framework in CopyFiles */,
+				E184E83E1C1E6F7400185B5D /* XCGLogger.framework in CopyFiles */,
+				E184E83F1C1E6FBB00185B5D /* WatsonSDK.framework in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		E1103AA61C17A5350062BEB6 /* WatsonSDKTokenFetch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WatsonSDKTokenFetch.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -28,6 +81,14 @@
 		E1103ACE1C17A9FF0062BEB6 /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKLoginKit.framework; path = ../../Documents/FacebookSDK/FBSDKLoginKit.framework; sourceTree = "<group>"; };
 		E1103ACF1C17A9FF0062BEB6 /* FBSDKShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKShareKit.framework; path = ../../Documents/FacebookSDK/FBSDKShareKit.framework; sourceTree = "<group>"; };
 		E171CC1F1C1E3A3100D64F3A /* TranslateViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TranslateViewController.swift; sourceTree = "<group>"; };
+		E171CC231C1E4ED900D64F3A /* WatsonSDK.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = WatsonSDK.xcodeproj; path = "../../../Watson-iOS-SDK/WatsonSDK.xcodeproj"; sourceTree = "<group>"; };
+		E184E8221C1E6ED900185B5D /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Alamofire.framework; sourceTree = "<group>"; };
+		E184E8231C1E6ED900185B5D /* AlamofireObjectMapper.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AlamofireObjectMapper.framework; sourceTree = "<group>"; };
+		E184E8241C1E6ED900185B5D /* HTTPStatusCodes.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = HTTPStatusCodes.framework; sourceTree = "<group>"; };
+		E184E8251C1E6ED900185B5D /* ObjectMapper.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ObjectMapper.framework; sourceTree = "<group>"; };
+		E184E8261C1E6ED900185B5D /* Starscream.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Starscream.framework; sourceTree = "<group>"; };
+		E184E8271C1E6ED900185B5D /* SwiftyJSON.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SwiftyJSON.framework; sourceTree = "<group>"; };
+		E184E8281C1E6ED900185B5D /* XCGLogger.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = XCGLogger.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -37,6 +98,14 @@
 			files = (
 				E1103AD01C17A9FF0062BEB6 /* FBSDKCoreKit.framework in Frameworks */,
 				E1103AD11C17A9FF0062BEB6 /* FBSDKLoginKit.framework in Frameworks */,
+				E184E82E1C1E6ED900185B5D /* SwiftyJSON.framework in Frameworks */,
+				E1DE23A81C1E4F0D00ED9EB8 /* WatsonSDK.framework in Frameworks */,
+				E184E82A1C1E6ED900185B5D /* AlamofireObjectMapper.framework in Frameworks */,
+				E184E82F1C1E6ED900185B5D /* XCGLogger.framework in Frameworks */,
+				E184E8291C1E6ED900185B5D /* Alamofire.framework in Frameworks */,
+				E184E82D1C1E6ED900185B5D /* Starscream.framework in Frameworks */,
+				E184E82B1C1E6ED900185B5D /* HTTPStatusCodes.framework in Frameworks */,
+				E184E82C1C1E6ED900185B5D /* ObjectMapper.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -46,6 +115,7 @@
 		E1103A9D1C17A5350062BEB6 = {
 			isa = PBXGroup;
 			children = (
+				E171CC231C1E4ED900D64F3A /* WatsonSDK.xcodeproj */,
 				E1103AA81C17A5350062BEB6 /* WatsonSDKTokenFetch */,
 				E1103AA71C17A5350062BEB6 /* Products */,
 			);
@@ -77,12 +147,28 @@
 		E1103ABB1C17A6660062BEB6 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				E184E8221C1E6ED900185B5D /* Alamofire.framework */,
+				E184E8231C1E6ED900185B5D /* AlamofireObjectMapper.framework */,
+				E184E8241C1E6ED900185B5D /* HTTPStatusCodes.framework */,
+				E184E8251C1E6ED900185B5D /* ObjectMapper.framework */,
+				E184E8261C1E6ED900185B5D /* Starscream.framework */,
+				E184E8271C1E6ED900185B5D /* SwiftyJSON.framework */,
+				E184E8281C1E6ED900185B5D /* XCGLogger.framework */,
 				E1103ACD1C17A9FF0062BEB6 /* FBSDKCoreKit.framework */,
 				E1103ACE1C17A9FF0062BEB6 /* FBSDKLoginKit.framework */,
 				E1103ACF1C17A9FF0062BEB6 /* FBSDKShareKit.framework */,
 			);
 			name = Frameworks;
 			path = ..;
+			sourceTree = "<group>";
+		};
+		E171CC241C1E4ED900D64F3A /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				E171CC291C1E4ED900D64F3A /* WatsonSDK.framework */,
+				E171CC2B1C1E4ED900D64F3A /* WatsonSDKTests.xctest */,
+			);
+			name = Products;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -95,6 +181,7 @@
 				E1103AA21C17A5350062BEB6 /* Sources */,
 				E1103AA31C17A5350062BEB6 /* Frameworks */,
 				E1103AA41C17A5350062BEB6 /* Resources */,
+				E184E8371C1E6F6600185B5D /* CopyFiles */,
 			);
 			buildRules = (
 			);
@@ -131,12 +218,35 @@
 			mainGroup = E1103A9D1C17A5350062BEB6;
 			productRefGroup = E1103AA71C17A5350062BEB6 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = E171CC241C1E4ED900D64F3A /* Products */;
+					ProjectRef = E171CC231C1E4ED900D64F3A /* WatsonSDK.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				E1103AA51C17A5350062BEB6 /* WatsonSDKTokenFetch */,
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		E171CC291C1E4ED900D64F3A /* WatsonSDK.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = WatsonSDK.framework;
+			remoteRef = E171CC281C1E4ED900D64F3A /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		E171CC2B1C1E4ED900D64F3A /* WatsonSDKTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = WatsonSDKTests.xctest;
+			remoteRef = E171CC2A1C1E4ED900D64F3A /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		E1103AA41C17A5350062BEB6 /* Resources */ = {
@@ -262,7 +372,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				FRAMEWORK_SEARCH_PATHS = /Users/Robert/Documents/FacebookSDK;
+				FRAMEWORK_SEARCH_PATHS = (
+					/Users/Robert/Documents/FacebookSDK,
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = WatsonSDKTokenFetch/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = org.rfdickerson.WatsonSDKTokenFetch;
@@ -275,7 +388,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				FRAMEWORK_SEARCH_PATHS = /Users/Robert/Documents/FacebookSDK;
+				FRAMEWORK_SEARCH_PATHS = (
+					/Users/Robert/Documents/FacebookSDK,
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = WatsonSDKTokenFetch/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = org.rfdickerson.WatsonSDKTokenFetch;

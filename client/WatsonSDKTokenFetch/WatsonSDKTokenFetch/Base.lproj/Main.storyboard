@@ -19,14 +19,14 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="LanguageTranslationLogo" translatesAutoresizingMaskIntoConstraints="NO" id="jNh-lG-6Vk">
-                                <rect key="frame" x="172" y="20" width="256" height="256"/>
+                                <rect key="frame" x="236" y="120" width="128" height="128"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="256" id="LRR-rz-ABd"/>
-                                    <constraint firstAttribute="height" constant="256" id="Pnj-dd-7br"/>
+                                    <constraint firstAttribute="width" constant="128" id="LRR-rz-ABd"/>
+                                    <constraint firstAttribute="height" constant="128" id="Pnj-dd-7br"/>
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Language Translation" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hQs-bz-Ohl">
-                                <rect key="frame" x="204" y="292" width="192.5" height="24"/>
+                                <rect key="frame" x="204" y="264" width="192.5" height="24"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -37,7 +37,7 @@
                             <constraint firstItem="hQs-bz-Ohl" firstAttribute="top" secondItem="jNh-lG-6Vk" secondAttribute="bottom" constant="16" id="BcX-p1-6zn"/>
                             <constraint firstItem="hQs-bz-Ohl" firstAttribute="centerX" secondItem="jNh-lG-6Vk" secondAttribute="centerX" id="oA7-jB-LgZ"/>
                             <constraint firstItem="jNh-lG-6Vk" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="rGJ-hC-elJ"/>
-                            <constraint firstItem="jNh-lG-6Vk" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="20" id="tWy-0q-aHt"/>
+                            <constraint firstItem="jNh-lG-6Vk" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="120" id="tWy-0q-aHt"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Login" id="4N6-c4-Mcu"/>
@@ -61,8 +61,20 @@
                         <rect key="frame" x="0.0" y="64" width="600" height="536"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Translate the Text:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DGf-pu-QSC">
-                                <rect key="frame" x="20" y="84" width="142" height="21"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DNY-dw-wpx">
+                                <rect key="frame" x="236" y="143" width="128" height="128"/>
+                                <state key="normal" image="microphone">
+                                    <color key="titleShadowColor" red="0.65647055366435736" green="0.77599209689264115" blue="0.83966619318181812" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="English" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qej-Kh-sqG">
+                                <rect key="frame" x="51" y="442" width="56" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="German" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="34B-Hu-ANo">
+                                <rect key="frame" x="500" y="442" width="61" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -70,8 +82,12 @@
                         </subviews>
                         <color key="backgroundColor" red="0.070588235294117646" green="0.10196078431372549" blue="0.15294117647058825" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstAttribute="leadingMargin" secondItem="DGf-pu-QSC" secondAttribute="leading" id="8PM-k2-reM"/>
-                            <constraint firstItem="DGf-pu-QSC" firstAttribute="top" secondItem="j9R-Ak-KF8" secondAttribute="bottom" constant="84" id="rF4-zL-O2S"/>
+                            <constraint firstItem="DNY-dw-wpx" firstAttribute="centerX" secondItem="Ml2-sH-I4U" secondAttribute="centerX" id="3gr-hh-x1V"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="34B-Hu-ANo" secondAttribute="trailing" constant="19" id="EHK-QD-wxb"/>
+                            <constraint firstItem="ye5-n6-e0Q" firstAttribute="top" secondItem="qej-Kh-sqG" secondAttribute="bottom" constant="73" id="GSs-fY-pYT"/>
+                            <constraint firstItem="qej-Kh-sqG" firstAttribute="leading" secondItem="Ml2-sH-I4U" secondAttribute="leadingMargin" constant="31" id="OQB-Sd-Q2D"/>
+                            <constraint firstItem="ye5-n6-e0Q" firstAttribute="top" secondItem="34B-Hu-ANo" secondAttribute="bottom" constant="73" id="YyK-06-NIL"/>
+                            <constraint firstItem="DNY-dw-wpx" firstAttribute="top" secondItem="j9R-Ak-KF8" secondAttribute="bottom" constant="143" id="ZNH-zv-30Q"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Translate" id="eQn-Vt-03i"/>
@@ -106,5 +122,6 @@
     </scenes>
     <resources>
         <image name="LanguageTranslationLogo" width="128" height="128"/>
+        <image name="microphone" width="128" height="128"/>
     </resources>
 </document>
