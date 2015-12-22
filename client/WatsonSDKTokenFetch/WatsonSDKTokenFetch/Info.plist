@@ -62,6 +62,22 @@
     <dict>
         <key>NSExceptionDomains</key>
         <dict>
+            <key>watsonplatform.net</key>
+            <dict>
+                <key>NSTemporaryExceptionRequiresForwardSecrecy</key>
+                <false/>
+                <key>NSIncludesSubdomains</key>
+                <true/>
+                <key>NSTemporaryExceptionAllowsInsecureHTTPLoads</key>
+                <true/>
+            </dict>
+            <key>mybluemix.net</key>
+            <dict>
+                <key>NSIncludesSubdomains</key>
+                <true/>
+                <key>NSThirdPartyExceptionRequiresForwardSecrecy</key>
+                <false/>
+            </dict>
             <key>facebook.com</key>
             <dict>
                 <key>NSIncludesSubdomains</key>
