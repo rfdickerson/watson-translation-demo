@@ -13,6 +13,8 @@
 		E1103AB11C17A5350062BEB6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E1103AB01C17A5350062BEB6 /* Assets.xcassets */; };
 		E1103AD01C17A9FF0062BEB6 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E1103ACD1C17A9FF0062BEB6 /* FBSDKCoreKit.framework */; };
 		E1103AD11C17A9FF0062BEB6 /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E1103ACE1C17A9FF0062BEB6 /* FBSDKLoginKit.framework */; };
+		E12D45B51C3AF02B008B3796 /* WatsonDeveloperCloud.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E176FE4B1C29C6D800700A6B /* WatsonDeveloperCloud.framework */; };
+		E12D45B61C3B242C008B3796 /* WatsonDeveloperCloud.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = E176FE4B1C29C6D800700A6B /* WatsonDeveloperCloud.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		E171CC201C1E3A3100D64F3A /* TranslateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E171CC1F1C1E3A3100D64F3A /* TranslateViewController.swift */; };
 		E184E8291C1E6ED900185B5D /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E184E8221C1E6ED900185B5D /* Alamofire.framework */; };
 		E184E82A1C1E6ED900185B5D /* AlamofireObjectMapper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E184E8231C1E6ED900185B5D /* AlamofireObjectMapper.framework */; };
@@ -31,6 +33,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		E12D45B01C3AEF86008B3796 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E176FE451C29C6D800700A6B /* WatsonDeveloperCloud.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 7A0F95B21C23288E004C01C0;
+			remoteInfo = WatsonDeveloperCloud;
+		};
 		E176FE4A1C29C6D800700A6B /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = E176FE451C29C6D800700A6B /* WatsonDeveloperCloud.xcodeproj */;
@@ -54,6 +63,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				E12D45B61C3B242C008B3796 /* WatsonDeveloperCloud.framework in CopyFiles */,
 				E184E8381C1E6F7300185B5D /* Alamofire.framework in CopyFiles */,
 				E184E8391C1E6F7300185B5D /* AlamofireObjectMapper.framework in CopyFiles */,
 				E184E83A1C1E6F7300185B5D /* HTTPStatusCodes.framework in CopyFiles */,
@@ -93,6 +103,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E12D45B51C3AF02B008B3796 /* WatsonDeveloperCloud.framework in Frameworks */,
 				E1103AD01C17A9FF0062BEB6 /* FBSDKCoreKit.framework in Frameworks */,
 				E1103AD11C17A9FF0062BEB6 /* FBSDKLoginKit.framework in Frameworks */,
 				E184E82E1C1E6ED900185B5D /* SwiftyJSON.framework in Frameworks */,
@@ -182,6 +193,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				E12D45B11C3AEF86008B3796 /* PBXTargetDependency */,
 			);
 			name = WatsonSDKTokenFetch;
 			productName = WatsonSDKTokenFetch;
@@ -268,6 +280,14 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		E12D45B11C3AEF86008B3796 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = WatsonDeveloperCloud;
+			targetProxy = E12D45B01C3AEF86008B3796 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		E1103AAD1C17A5350062BEB6 /* Main.storyboard */ = {

@@ -18,7 +18,7 @@ import Foundation
 import UIKit
 import AVFoundation
 
-import WatsonSDK
+import WatsonDeveloperCloud
 
 class TranslateViewController: UIViewController, AVAudioRecorderDelegate {
     
@@ -34,7 +34,13 @@ class TranslateViewController: UIViewController, AVAudioRecorderDelegate {
     
     @IBAction func clickMicrophone(sender: AnyObject) {
         
-        startStopRecording()
+        // startStopRecording()
+        AVAudioSession.sharedInstance().requestRecordPermission({
+            granted in
+            
+            self.startStopListening()
+            
+        })
         
     }
     
@@ -42,7 +48,8 @@ class TranslateViewController: UIViewController, AVAudioRecorderDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
     
-        initRecorder()
+        // initRecorder()
+        
         initSpeechRec()
         initSpeechSynthesis()
         initTranslateService()
@@ -67,10 +74,7 @@ class TranslateViewController: UIViewController, AVAudioRecorderDelegate {
             fbToken: token)
         
         translateService = LanguageTranslation(authStrategy: fbAccess)
-        //translateService = LanguageTranslation(
-        //    username: "1b029359-ffe7-4b40-9bac-3bdcd94f626f",
-        //    password: "ny8tRyFfNASZ"
-        //)
+        
     }
     
     func initRecorder() {
@@ -126,11 +130,22 @@ class TranslateViewController: UIViewController, AVAudioRecorderDelegate {
         
         ttsService = TextToSpeech(authStrategy: fbAccess)
         
-        //ttsService = TextToSpeech(username: "e08066f7-a27f-4732-8d10-ac7895d0a9b4",
-        //    password: "bXNBDOHvKUXE")
-        
-        
 
+    }
+    
+    private func startStopListening() {
+        
+        if sttService?.listening == false {
+            
+            sttService?.startListening()
+            
+            
+        } else {
+            
+            sttService?.stopListening()
+            
+        }
+        
     }
     
     func startStopRecording() {
@@ -191,7 +206,7 @@ class TranslateViewController: UIViewController, AVAudioRecorderDelegate {
             let data = NSData(contentsOfURL: recorder.url)
             
             if let data = data {
-                sttService.transcribe(data , format: .WAV, oncompletion: {
+                sttService.transcribe(data , format: .WAV, completionHandler: {
                     
                     response, error in
                     
@@ -265,4 +280,11 @@ class TranslateViewController: UIViewController, AVAudioRecorderDelegate {
     }
 
     
+}
+
+extension TranslateViewController : SpeechToTextDelegate {
+    
+    func onSpeechRecognized(text: String) {
+        
+    }
 }
