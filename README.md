@@ -23,6 +23,7 @@ $ cf login
 $ cf create-service speech_to_text standard speech-to-text-service
 $ cf create-service text_to_speech standard text-to-speech-service
 $ cf create-service language_translation standard language-translation-service
+$ cf create-user-provided-service facebook-authentication -p "APP_SECRET_GOES_HERE"
 $ cf env
 ```
 
